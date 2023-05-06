@@ -1,0 +1,13 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="aiohttp.web_app.Application.config" />
+          <option value="aiohttp.web_app.Application.base_path" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>

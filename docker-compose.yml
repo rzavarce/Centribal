@@ -1,0 +1,45 @@
+# docker-compose build
+version: '3'
+volumes:
+  postgres-data:
+
+services:
+
+  postgredb:
+    image: postgres:14
+    container_name: postgredb
+    restart: always
+    privileged: true
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: centribaldb
+      POSTGRES_USER: centribaluser
+      POSTGRES_PASSWORD: 5nFyHgRtx8z3Mf5kcar8d2D4yQrVgFE2
+    ports:
+      - "5432:5432"
+    networks:
+      default:
+
+  api:
+      build: .
+      container_name: centribal_api
+      restart: always
+      command: poetry run python3 manage.py runserver 0.0.0.0:8800
+      volumes:
+        - .:/opt/projects/Centribal/
+      environment:
+        POSTGRES_HOST: postgredb
+        POSTGRES_PORT: 5432
+        POSTGRES_DB: centribaldb
+        POSTGRES_USER: centribaluser
+        POSTGRES_PASSWORD: 5nFyHgRtx8z3Mf5kcar8d2D4yQrVgFE2
+        SECRET_KEY: e%ebfx1%5ot@^nqru7!i1705qq7*@30b3Khgf5@zss%h93tn!63
+        DEBUG: 0
+      ports:
+        - "8800:8800"
+      networks:
+        default:
+
+networks:
+  default:
