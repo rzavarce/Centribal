@@ -100,7 +100,7 @@
     data () {
       return {
         email: this.getCookie('centribaluser'),
-        recovery: 'rogerzavarce@gmail.com',
+        recovery: '',
         password: this.getCookie('centribalpassword'),
         remember: Cookies.has('centribaluser') && Cookies.has('centribalpassword'),
         login_form_display: true,
@@ -122,8 +122,8 @@
       },
 
       onResetForm () {
-        this.email = ''
-        this.password = ''
+        this.email = 'admin@centribal.com'
+        this.password = 'admin.1234'
         this.remember = false
       },
 

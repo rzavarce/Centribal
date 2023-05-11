@@ -90,6 +90,8 @@ It will only be necessary to have previously installed the following packages:
    ```   
 4. Enjoy! go to http://localhost:8080/
 
+User: admin@centribal.com
+Paswword: admin.1234
 
 ## Routes
 
