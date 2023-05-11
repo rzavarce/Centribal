@@ -1,17 +1,16 @@
-# docker-compose build
 version: '3'
 volumes:
-  postgres-data:
+  Database:
 
 services:
-
   postgredb:
     image: postgres:14
     container_name: postgredb
     restart: always
     privileged: true
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - Database:/var/lib/postgresql/data
+      - ./Database/dump.sql:/docker-entrypoint-initdb.d/dump.sql
     environment:
       POSTGRES_DB: centribaldb
       POSTGRES_USER: centribaluser
@@ -22,7 +21,9 @@ services:
       default:
 
   api:
-      build: .
+      build:
+        context: .
+        dockerfile: ./Backend/Dockerfile
       container_name: centribal_api
       restart: always
       command: poetry run python3 manage.py runserver 0.0.0.0:8800
@@ -40,6 +41,18 @@ services:
         - "8800:8800"
       networks:
         default:
-
+  
+  webapp:
+    container_name: centribal_webapp
+    build:
+        context: .
+        dockerfile: ./Frontend/Dockerfile
+    restart: always
+    ports:
+      - "8080:8080"
+    stdin_open: true
+    tty: true
+            
 networks:
   default:
+
